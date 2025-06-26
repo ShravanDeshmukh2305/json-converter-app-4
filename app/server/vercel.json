@@ -5,11 +5,15 @@
       "src": "index.js",
       "use": "@vercel/node",
       "config": {
+        "maxLambdaSize": "50mb",
         "includeFiles": [
           "app.js",
           "routes/**",
           "models/**",
-          "config/**"
+          "config/**",
+          "services/**",
+          "controllers/**",
+          "node_modules/**"
         ]
       }
     }
@@ -17,13 +21,14 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/.netlify/functions/api/$1",
-      "status": 200
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html",
-      "status": 200
+      "dest": "index.js",
+      "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
     }
-  ]
+  ],
+  "env": {
+    "NODE_ENV": "production",
+    "MONGO_URI": "mongodb+srv://your-username:your-password@cluster0.hwiqfoy.mongodb.net/devtoolbox?retryWrites=true&w=majority",
+    "JWT_SECRET": "your-secret-key-here"
+  }
 }
+

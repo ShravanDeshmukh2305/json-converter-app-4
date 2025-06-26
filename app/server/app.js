@@ -19,6 +19,7 @@
 // export default app; 
 
 
+
 import express from 'express';
 import cors from 'cors';
 import serverless from 'serverless-http';
@@ -27,19 +28,32 @@ import base64Routes from './routes/base64Routes.js';
 
 const app = express();
 
-// Middleware
-app.use(cors());
-app.use(express.json());
+// Essential middleware
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type']
+}));
 
-// Routes must use '/.netlify/functions/api' prefix for Vercel
-app.use('/.netlify/functions/api', jsonRoutes); 
-app.use('/.netlify/functions/api', base64Routes);
+app.use(express.json({ limit: '10mb' }));
 
-// 404 Handler for undefined routes
-app.use((req, res) => {
-  res.status(404).json({ 
-    code: 'NOT_FOUND',
-    message: 'Route not found' 
+// API Routes
+app.use('/api', jsonRoutes);
+app.use('/api', base64Routes);
+
+// Health check endpoint
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'healthy' });
+});
+
+// Error handling (must be last)
+app.use((err, req, res, next) => {
+  console.error('Server Error:', err);
+  res.status(500).json({
+    code: 'SERVER_ERROR',
+    message: process.env.NODE_ENV === 'production' 
+      ? 'Internal server error' 
+      : err.message
   });
 });
 

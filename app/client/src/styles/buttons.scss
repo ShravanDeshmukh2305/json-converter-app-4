@@ -1,0 +1,83 @@
+button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: $border-radius;
+  cursor: pointer;
+  transition: $transition;
+
+  &.primary {
+    background-color: $button-primary;
+    color: $button-primary-text;
+
+    &:hover {
+      background-color: darken($button-primary, 10%);
+    }
+  }
+
+  &.secondary {
+    background-color: $border-light;
+    color: $text-dark-primary;
+
+    &:hover {
+      background-color: darken($border-light, 10%);
+    }
+  }
+
+  &.success {
+    background-color: $success;
+    color: white;
+
+    &:hover {
+      background-color: darken($success, 10%);
+    }
+  }
+
+  &.danger {
+    background-color: $danger;
+    color: white;
+
+    &:hover {
+      background-color: darken($danger, 10%);
+    }
+  }
+
+  &.toggle-mode {
+    border: 1px solid $border-light;
+    background-color: transparent;
+    color: inherit;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+  }
+}
+
+body.dark {
+  button {
+    &.primary {
+      background-color: $button-primary-dark;
+      color: $button-primary-text-dark;
+
+      &:hover {
+        background-color: darken($button-primary-dark, 10%);
+      }
+    }
+
+    &.secondary {
+      background-color: $border-dark;
+      color: $text-light-primary;
+
+      &:hover {
+        background-color: lighten($border-dark, 10%);
+      }
+    }
+
+    &.toggle-mode {
+      border-color: $border-dark;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+      }
+    }
+  }
+}

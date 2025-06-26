@@ -1,0 +1,43 @@
+body {
+  background-color: $bg-light;
+  color: $text-dark-primary;
+  font-family: 'Segoe UI', sans-serif;
+  transition: $transition;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+body.dark {
+  background-color: $bg-dark;
+  color: $text-light-primary;
+
+  textarea, pre {
+    background-color: $card-bg-dark;
+    color: $text-light-primary;
+    border-color: $border-dark;
+  }
+}
+
+textarea {
+  font-family: monospace;
+  resize: vertical;
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: $border-radius;
+  border: 1px solid $border-light;
+  margin-bottom: 1rem;
+  background-color: $card-bg-light;
+  color: $text-dark-primary;
+  transition: $transition;
+}
+
+pre {
+  background-color: $card-bg-light;
+  padding: 1rem;
+  border-radius: $border-radius;
+  overflow-x: auto;
+  font-family: monospace;
+  font-size: 0.95rem;
+  transition: $transition;
+}

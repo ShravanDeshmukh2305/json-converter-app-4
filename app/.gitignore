@@ -1,0 +1,16 @@
+# Dependency directories
+node_modules/
+dist/
+build/
+
+# Environment files
+.env
+.env.local
+
+# Docker files
+docker-compose.override.yml
+
+# IDE & OS files
+.DS_Store
+.idea/
+.vscode/
